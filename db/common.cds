@@ -44,5 +44,10 @@ annotate custom.managed with {
   LastChangedBy @title : '{i18n>ChangedBy}';
 }
 
+annotate custom.managed with {
+    createdAt @Core.Immutable;
+    createdBy @Core.Immutable;
+};
+
 //
 //////////////////////////////////////////////////////////////////////////

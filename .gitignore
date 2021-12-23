@@ -6,6 +6,7 @@ default-*.json
 gen/
 node_modules/
 target/
+exercises_ignored/
 
 # Web IDE, App Studio
 .che/
@@ -39,3 +40,5 @@ dist/
 .classpath
 # .vscode/*
 # IMPORTANT: Do not exclude .vscode please!
+
+old.README.md
