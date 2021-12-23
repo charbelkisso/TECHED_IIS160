@@ -56,13 +56,14 @@ annotate TravelService.Travel with @UI : {
     { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.rejectTravel',   Label  : '{i18n>RejectTravel}'   },
     { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.deductDiscount', Label  : '{i18n>DeductDiscount}' },
     { Value : TravelID               },
+      { Value : TravelStatus_code,
+          Criticality : TravelStatus.criticality      },
     { Value : to_Agency_AgencyID     },
     { Value : to_Customer_CustomerID },    
     { Value : BeginDate              },
     { Value : EndDate                },
     { Value : BookingFee             },
     { Value : TotalPrice             },
-    { Value : TravelStatus_code      },    
     { Value : Description            }
   ],
   /*
@@ -91,7 +92,13 @@ annotate TravelService.Travel with @UI : {
         ID     : 'Dates',
         Target : '@UI.FieldGroup#Dates',
         Label  : '{i18n>Dates}'
-      }
+      },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>Sustainability1}',
+            ID : 'i18nSustainability1',
+            Target : '@UI.FieldGroup#i18nSustainability1',
+        }
     ]
   }, {  // booking list
       $Type  : 'UI.ReferenceFacet',
@@ -100,8 +107,8 @@ annotate TravelService.Travel with @UI : {
     }
   ],
   FieldGroup#GeneralData : { Data : [
-    { Value : to_Customer_CustomerID },    
     { Value : to_Agency_AgencyID     },
+      { Value : to_Customer_CustomerID },    
     {
       $Type       : 'UI.DataField',
       Value       : TravelStatus_code,
@@ -201,6 +208,38 @@ annotate TravelService.BookingSupplement with @UI : {
   ],
 };
 
+annotate TravelService.Travel with {
+    to_Agency @Common.Text : {
+            $value : to_Agency.Name,
+            ![@UI.TextArrangement] : #TextFirst,
+        }
+};
+annotate TravelService.Travel with {
+    Description @UI.MultiLineText : true
+};
+annotate TravelService.Travel with @(
+    UI.FieldGroup #Sustainability : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+        ],
+    }
+);
+annotate TravelService.Travel with @(
+    UI.FieldGroup #i18nSustainability1 : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : GoGreen,
+            },{
+                $Type : 'UI.DataField',
+                Value : GreenFee,
+            },{
+                $Type : 'UI.DataField',
+                Value : TreesPlanted,
+            },],
+    }
+);
 // Exercise 5: Booking entity Chart annotation
 
 
